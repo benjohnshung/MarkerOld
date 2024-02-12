@@ -1,6 +1,6 @@
 ﻿using Library.MarkerApp.models;
 
-namespace MarkerApp.Models
+namespace Library.MarkerApp.Models
 {
     public class Course
     {

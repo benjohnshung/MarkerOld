@@ -1,4 +1,4 @@
-﻿using MarkerApp.Models;
+﻿using Library.MarkerApp.Models;
 using MarkerApp.Services;
 using Library.MarkerApp.models;
 using Library.MarkerApp.services;
@@ -25,7 +25,34 @@ namespace MarkerApp.helpers
 
             courseSvc.Add(newCourse);
         }
+        public void AddStudentToCourse(Course CourseToUpdate)
+        {
+            if (CourseToUpdate.Roster == null || studentSvc.Students.Count() == 0)
+            {
+                Console.WriteLine("There are currently no students.");
+                return;
+            }
 
+            int count = 0;
+            studentSvc.Students.ToList().ForEach(c => Console.WriteLine($"{++count}. {c}"));
+
+            Console.WriteLine("Select a Student");
+            var choice = Console.ReadLine();
+            Student StudentToAdd;
+
+            if (int.TryParse(choice, out int intChoice))
+            {
+                StudentToAdd = studentSvc.Students.ElementAt(intChoice - 1);
+                Console.WriteLine($"{StudentToAdd}");
+            }
+            else
+            {
+                Console.WriteLine("Invalid Choice");
+                return;
+            }
+
+            if (CourseToUpdate.Roster != null) CourseToUpdate.Roster.Add(StudentToAdd);
+        }
         public void UpdateCourse()
         {
             int count = 0;
@@ -46,7 +73,7 @@ namespace MarkerApp.helpers
                 return;
             }
 
-            // PRINT COURSE INFORMATION (HAVE TO ADD)
+            Console.WriteLine(CourseToUpdate);
 
             Console.WriteLine("Please select a number:");
             Console.WriteLine("1 -- Update Course Code");
@@ -209,6 +236,61 @@ namespace MarkerApp.helpers
         }
         private void UpdateCourseAssignments(Course CourseToUpdate) { }
         private void UpdateCourseModules(Course CourseToUpdate) { }
+
+        private void AddStudentToCourse(Student StudentToAdd)
+        {
+            if (StudentToAdd == null) return;
+            if (studentSvc.Students.Count() == 0)
+            {
+                Console.WriteLine("There are currently no students.");
+                return;
+            }
+            Console.WriteLine("Please select a student by entering a number:");
+            Program.ListStudents(ref studentsList);
+            string? idS = Console.ReadLine();
+
+            while (idS == null)
+            {
+                Console.WriteLine("Please try again.");
+                idS = Console.ReadLine();
+            }
+
+            Person? currentSelectedStudent = studentsList.Find(x => x.ID == int.Parse(idS));
+
+            Course? currentSelectedCourse;
+            Console.WriteLine("First, select a course by entering the course code:");
+
+            ListCourses(ref coursesList);
+            string? userInput = Console.ReadLine();
+
+            while (userInput == null)
+            {
+                Console.WriteLine("Please try again.");
+                userInput = Console.ReadLine();
+            }
+
+            currentSelectedCourse = coursesList.Find(x => x.Code == userInput);
+
+            while (currentSelectedCourse == null)
+            {
+                Console.WriteLine($"{userInput} does not exist. Please try again.");
+                userInput = Console.ReadLine();
+                currentSelectedCourse = coursesList.Find(x => x.Code == userInput);
+            }
+
+            currentSelectedCourse.PrintAllInfo();
+
+            if (currentSelectedCourse.Roster != null && currentSelectedStudent != null && currentSelectedStudent.Courses != null && currentSelectedStudent.Grades != null)
+            {
+                currentSelectedCourse.Roster.Add(currentSelectedStudent);
+                currentSelectedStudent.Courses.Add(currentSelectedCourse);
+                currentSelectedStudent.Grades.Add(0);
+            }
+            else
+            {
+                Console.WriteLine("Could not find course. Bye.");
+            }
+        }
         private void PrintRoster(Course CourseToUpdate) 
         {  
             if(CourseToUpdate.Roster != null)

@@ -1,4 +1,6 @@
-﻿namespace Library.MarkerApp.models
+﻿using Library.MarkerApp.Models;
+
+namespace Library.MarkerApp.models
 {
     public enum ClassificationType { Freshman, Sophomore, Junior, Senior }
     public class Student
@@ -7,6 +9,8 @@
         public ClassificationType? Classification { get; set; }
         public List<int>? Grades { get; set; }
         public Guid ID { get; set; }
+        public IList<Course>? CurrentCourses { get; set; }
+
 
         public Student()
         {

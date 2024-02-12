@@ -35,7 +35,7 @@ namespace Library.MarkerApp.services
             {
                 return students.Where(
                 c =>
-                        c.Name.ToUpper().Contains(query ?? string.Empty));
+                        (c.Name ?? string.Empty).ToUpper().Contains(query ?? string.Empty));
             }
         }
 
@@ -50,9 +50,9 @@ namespace Library.MarkerApp.services
             return Students;
         }
 
-        public void Add(Student student)
+        public void Add(Student studentToAdd)
         {
-            students.Add(student);
+            students.Add(studentToAdd);
         }
 
         public void Delete(Student studentToDelete)
