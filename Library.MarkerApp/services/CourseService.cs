@@ -1,8 +1,6 @@
-﻿using Library.MarkerApp.models;
-using Library.MarkerApp.services;
-using Library.MarkerApp.Models;
+﻿using Library.MarkerApp.Models;
 
-namespace MarkerApp.Services
+namespace Library.MarkerApp.Services
 {
     public class CourseService
     {

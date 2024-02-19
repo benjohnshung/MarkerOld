@@ -1,6 +1,6 @@
 ﻿using Library.MarkerApp.Models;
 
-namespace Library.MarkerApp.models
+namespace Library.MarkerApp.Models
 {
     public enum ClassificationType { Freshman, Sophomore, Junior, Senior }
     public class Student

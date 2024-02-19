@@ -1,12 +1,6 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Library.MarkerApp.models;
+﻿using Library.MarkerApp.Models;
 
-namespace Library.MarkerApp.services
+namespace Library.MarkerApp.Services
 {
     public class StudentService
     {

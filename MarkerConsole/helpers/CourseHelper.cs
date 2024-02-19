@@ -1,7 +1,5 @@
 ﻿using Library.MarkerApp.Models;
-using MarkerApp.Services;
-using Library.MarkerApp.models;
-using Library.MarkerApp.services;
+using Library.MarkerApp.Services;
 
 namespace MarkerApp.helpers
 {
@@ -237,60 +235,60 @@ namespace MarkerApp.helpers
         private void UpdateCourseAssignments(Course CourseToUpdate) { }
         private void UpdateCourseModules(Course CourseToUpdate) { }
 
-        private void AddStudentToCourse(Student StudentToAdd)
-        {
-            if (StudentToAdd == null) return;
-            if (studentSvc.Students.Count() == 0)
-            {
-                Console.WriteLine("There are currently no students.");
-                return;
-            }
-            Console.WriteLine("Please select a student by entering a number:");
-            Program.ListStudents(ref studentsList);
-            string? idS = Console.ReadLine();
+        // private void AddStudentToCourse(Student StudentToAdd)
+        // {
+        //     if (StudentToAdd == null) return;
+        //     if (studentSvc.Students.Count() == 0)
+        //     {
+        //         Console.WriteLine("There are currently no students.");
+        //         return;
+        //     }
+        //     Console.WriteLine("Please select a student by entering a number:");
+        //     Program.ListStudents(ref studentsList);
+        //     string? idS = Console.ReadLine();
 
-            while (idS == null)
-            {
-                Console.WriteLine("Please try again.");
-                idS = Console.ReadLine();
-            }
+        //     while (idS == null)
+        //     {
+        //         Console.WriteLine("Please try again.");
+        //         idS = Console.ReadLine();
+        //     }
 
-            Person? currentSelectedStudent = studentsList.Find(x => x.ID == int.Parse(idS));
+        //     Person? currentSelectedStudent = studentsList.Find(x => x.ID == int.Parse(idS));
 
-            Course? currentSelectedCourse;
-            Console.WriteLine("First, select a course by entering the course code:");
+        //     Course? currentSelectedCourse;
+        //     Console.WriteLine("First, select a course by entering the course code:");
 
-            ListCourses(ref coursesList);
-            string? userInput = Console.ReadLine();
+        //     ListCourses(ref coursesList);
+        //     string? userInput = Console.ReadLine();
 
-            while (userInput == null)
-            {
-                Console.WriteLine("Please try again.");
-                userInput = Console.ReadLine();
-            }
+        //     while (userInput == null)
+        //     {
+        //         Console.WriteLine("Please try again.");
+        //         userInput = Console.ReadLine();
+        //     }
 
-            currentSelectedCourse = coursesList.Find(x => x.Code == userInput);
+        //     currentSelectedCourse = coursesList.Find(x => x.Code == userInput);
 
-            while (currentSelectedCourse == null)
-            {
-                Console.WriteLine($"{userInput} does not exist. Please try again.");
-                userInput = Console.ReadLine();
-                currentSelectedCourse = coursesList.Find(x => x.Code == userInput);
-            }
+        //     while (currentSelectedCourse == null)
+        //     {
+        //         Console.WriteLine($"{userInput} does not exist. Please try again.");
+        //         userInput = Console.ReadLine();
+        //         currentSelectedCourse = coursesList.Find(x => x.Code == userInput);
+        //     }
 
-            currentSelectedCourse.PrintAllInfo();
+        //     currentSelectedCourse.PrintAllInfo();
 
-            if (currentSelectedCourse.Roster != null && currentSelectedStudent != null && currentSelectedStudent.Courses != null && currentSelectedStudent.Grades != null)
-            {
-                currentSelectedCourse.Roster.Add(currentSelectedStudent);
-                currentSelectedStudent.Courses.Add(currentSelectedCourse);
-                currentSelectedStudent.Grades.Add(0);
-            }
-            else
-            {
-                Console.WriteLine("Could not find course. Bye.");
-            }
-        }
+        //     if (currentSelectedCourse.Roster != null && currentSelectedStudent != null && currentSelectedStudent.Courses != null && currentSelectedStudent.Grades != null)
+        //     {
+        //         currentSelectedCourse.Roster.Add(currentSelectedStudent);
+        //         currentSelectedStudent.Courses.Add(currentSelectedCourse);
+        //         currentSelectedStudent.Grades.Add(0);
+        //     }
+        //     else
+        //     {
+        //         Console.WriteLine("Could not find course. Bye.");
+        //     }
+        // }
         private void PrintRoster(Course CourseToUpdate) 
         {  
             if(CourseToUpdate.Roster != null)
